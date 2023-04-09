@@ -1,0 +1,1 @@
+{'learningRate': 1e-06, 'batchSize': 4, 'imgSize': 224, 'optimizer': 'Adam', 'alphaFocalLoss': 0.7, 'gammaFocalLoss': 2.5, 'momentum': 0.4, 'fineTuneEnable': True, 'fineTuneLayer': ['layer4'], 'finetuneBatchNorm': True, 'lossType': 'CE', 'numberOfEpochs': 50, 'weightDecay': 0.0001, 'dataset': '/home/sorter1/Dataset/2clss_20221219_Cheft/train.csv'}
