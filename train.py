@@ -21,9 +21,7 @@ from torchvision import transforms
 from MyDataSetClass import MultiLabelDataset
 from logger import Logger
 from PIL import Image, ImageFile
-
 # from models import *
-# sys.path.insert(0, "/home/sorter1/PythonMainCode/sota-backbones")
 
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
@@ -32,22 +30,22 @@ ImageFile.LOAD_TRUNCATED_IMAGES = True
 nGPUs = torch.cuda.device_count()
 use_gpu = torch.cuda.is_available()  # use GPU
 
-# ---- Data Set Settings -----------------
-Train_IMG_PATH = ''
-Train_IMG_EXT = '.png'
-Train_DATA_CSV = '/home/sorter1/Dataset/2clss_20221219_Cheft/train.csv'
+# ---- DataSet Settings -----------------
+TRAIN_IMG_PATH = ''
+TRAIN_IMG_EXT = '.png'
+TRAIN_DATA_CSV = '/home/sorter1/Dataset/2clss_20221219_Cheft/train.csv'
 
-# Val_IMG_PATH = '/media/12t_hdd/Imagenet/'
-Val_IMG_PATH = ''
-Val_IMG_EXT = '.png'
-Val_DATA_CSV = '/home/sorter1/Dataset/2clss_20221219_Cheft/test.csv'
+# VAL_IMG_PATH = '/media/12t_hdd/Imagenet/'
+VAL_IMG_PATH = ''
+VAL_IMG_EXT = '.png'
+VAL_DATA_CSV = '/home/sorter1/Dataset/2clss_20221219_Cheft/test.csv'
 
-number_classes = 2
+number_of_classes = 2
 
 # ---- Training Settings -----------------
-batch_Size = 4
+batch_size = 4
 nCores = 1
-batchSize = batch_Size * nGPUs
+batchSize = batch_size * nGPUs
 numOfWorkers = nCores  # Number of Training CPU Cores
 initialLearningRate = 0.000001
 momentumValue = 0.4
@@ -69,7 +67,7 @@ fineTuneLayers = ['layer4']  # Set layers if fine tune is enabled
 fineTuneBN = True  # fine tune batch-normalization
 
 hyperParamsDictionary = {'learningRate': initialLearningRate,
-                         'batchSize': batch_Size,
+                         'batchSize': batch_size,
                          'imgSize': imgSize,
                          'optimizer': optimizerType,
                          'alphaFocalLoss': focalLossAlpha,
@@ -81,7 +79,7 @@ hyperParamsDictionary = {'learningRate': initialLearningRate,
                          'lossType': lossType,
                          'numberOfEpochs': numberOfEpochs,
                          'weightDecay': weightDecay,
-                         'dataset': Train_DATA_CSV}
+                         'dataset': TRAIN_DATA_CSV}
 
 if not os.path.isdir(save_dir):
     os.mkdir(save_dir)
@@ -99,10 +97,10 @@ normalize = transforms.Normalize(
 )
 
 trainTransformations = transforms.Compose([transforms.Resize((imgSize, imgSize)), transforms.ToTensor()])
-dset_train = MultiLabelDataset(Train_DATA_CSV, Train_IMG_PATH, Train_IMG_EXT, trainTransformations)
+dset_train = MultiLabelDataset(TRAIN_DATA_CSV, TRAIN_IMG_PATH, TRAIN_IMG_EXT, trainTransformations)
 
 valTransformations = transforms.Compose([transforms.Resize((imgSize, imgSize)), transforms.ToTensor()])
-dset_val = MultiLabelDataset(Val_DATA_CSV, Val_IMG_PATH, Val_IMG_EXT, valTransformations)
+dset_val = MultiLabelDataset(VAL_DATA_CSV, VAL_IMG_PATH, VAL_IMG_EXT, valTransformations)
 
 # Loading the data (second part) (DataLoader):
 if use_gpu:
@@ -155,13 +153,13 @@ saveLabelsDistributionIntoTextFile(address_labels_distribution)
 #################### Model
 model = models.resnet50(pretrained=True)
 number_feats = model.fc.in_features
-model.fc = nn.Linear(in_features=number_feats, out_features=number_classes)
+model.fc = nn.Linear(in_features=number_feats, out_features=number_of_classes)
 print(model)
 
 
-#### FineTune other networks
+#### FineTune networks
 if fineTuneEnable:
-    # #### Fine-Tune ImageNet
+    # #### Fine-Tune ImageNet models
     for name, child in model.named_children():
         if name in fineTuneLayers:
             print(name + ' is unfrozen')
