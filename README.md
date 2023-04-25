@@ -4,8 +4,92 @@ The CNNs repository is a collection of python codes used for training deep convo
 ## How to train?
 Before running the `train.py` script in the CNNs repository, you'll need to specify some hyperparameters within the script. `train.py` is the primary training script for the CNN models, responsible for training the model on a specific dataset, validating the model with specified validation data, and saving the trained model to a specified location. Additionally, the script allows for hyperparameter tuning, enabling you to adjust the model's parameters and fine-tune it to get better results.
 
+### Prepare your own data-set
+To start on your own dataset, first you need to prepare it. Just split your data into the train and validation set and build a table from them.
+The table consists of two columns:
 
-‍‍``‍`
-python3 train.py  
++ **image_name:** the path to the image.
++ **tags:** the ground-truth label corresponding to the image.
 
-```
+Here is an example for the `train.csv` and `val.csv` files:
+
+<table>
+<tr>
+<th>image_name</th>
+<th>tags</th>
+</tr>
+<tr>
+<td>
+/home/user1/dataset/train_image1.png
+</td>
+<td>
+label1
+</td>
+</tr>
+<tr>
+<td>
+/home/user1/dataset/train_image2.png
+</td>
+<td>
+label2
+</td>
+</tr>
+<tr>
+<td>
+.....
+</td>
+<td>
+.....
+</td>
+</tr>
+</table>
+
+<table>
+<tr>
+<th>image_name</th>
+<th>tags</th>
+</tr>
+<tr>
+<td>
+/home/user1/dataset/val_image1.png
+</td>
+<td>
+label1
+</td>
+</tr>
+<tr>
+<td>
+/home/user1/dataset/val_image2.png
+</td>
+<td>
+label2
+</td>
+</tr>
+<tr>
+<td>
+.....
+</td>
+<td>
+.....
+</td>
+</tr>
+</table>
+
+
+### Set hyper-parameters
+Based on your data and the desired output, you need to set hyper-parameters. Here is the definition of some parameters:
++ **save_dir:** all checkpoints and logs are saved in this directory.
++ **loss_function:** there are two main loss functions that you can use during the training process.
++ **focalLoss_alpha and focalLoss_gamma:** if you set the loss function to `Focal`, then you need to set these params.
++ **fineTune_enable:** if you want to fine-tune an existing network, you need to set it True.
++ **fineTune_layers:** when you set the `fineTune_enable` True you need to define the layers which you want to train them. In the other words, unfreeze these layers.
++ **fineTune_batchNorm:** if the model has `BatchNorm` layers, you can unfreeze them using this param.
+
+### Define your Network
+The `model` could be an existing model or your own model.
+
+### Start training
+Finally, start to train your model using this command:
+
+```python3 train.py```
+
