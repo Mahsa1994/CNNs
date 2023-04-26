@@ -85,11 +85,21 @@ Based on your data and the desired output, you need to set hyper-parameters. Her
 + **fineTune_layers:** when you set the `fineTune_enable` True you need to define the layers which you want to train them. In the other words, unfreeze these layers.
 + **fineTune_batchNorm:** if the model has `BatchNorm` layers, you can unfreeze them using this param.
 
-### Define your Network
-The `model` could be an existing model or your own model.
+### Define the Network
+The `model` could be an existing network or your own model. Here is an example of how to load the pretrained ImageNet model:
+
+```
+model = models.resnet50(pretrained=True)
+number_feats = model.fc.in_features
+model.fc = nn.Linear(in_features=number_feats, out_features=number_of_classes)
+```
 
 ### Start training
 Finally, start to train your model using this command:
 
 ```python3 train.py```
+
+To monitor the training process use the log file in the `save_dir`:
+
+```tensorboard --logdir=/path/to/event-file```
 
