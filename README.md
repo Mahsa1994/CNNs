@@ -94,6 +94,13 @@ number_feats = model.fc.in_features
 model.fc = nn.Linear(in_features=number_feats, out_features=number_of_classes)
 ```
 
+You may load your own model using below code:
+
+```
+my_model = torch.load('/home/user1/snapshots/model.pth')
+model = my_model['state_dict'].module ## when your model has a state_dict 
+```
+
 ### Start training
 Finally, start to train your model using this command:
 
@@ -102,4 +109,9 @@ Finally, start to train your model using this command:
 To monitor the training process use the log file in the `save_dir`:
 
 ```tensorboard --logdir=/path/to/event-file```
+
+### Future work
+- [ ] Add inference code
+- [ ] Add different new networks
+- [ ] Add std-mean calculator for normalization
 
