@@ -33,12 +33,11 @@ use_gpu = torch.cuda.is_available()  # use GPU
 # ---- DataSet Settings -----------------
 TRAIN_IMG_PATH = ''
 TRAIN_IMG_EXT = '.png'
-TRAIN_DATA_CSV = '/home/sorter1/Dataset/2clss_20221219_Cheft/train.csv'
+TRAIN_DATA_CSV = '/home/Dataset/2clss_20230101/train.csv'
 
-# VAL_IMG_PATH = '/media/12t_hdd/Imagenet/'
 VAL_IMG_PATH = ''
 VAL_IMG_EXT = '.png'
-VAL_DATA_CSV = '/home/sorter1/Dataset/2clss_20221219_Cheft/test.csv'
+VAL_DATA_CSV = '/home/Dataset/2clss_20230101/test.csv'
 
 number_of_classes = 2
 
@@ -52,7 +51,7 @@ momentum = 0.4
 lr_decay_factor = 0.1  # Factor by which the learning rate will be reduced. new_lr = lr * factor
 patience_factor = 3  # Number of epochs with no improvement after which learning rate will be reduced
 total_epochs = 50
-save_dir = './snapshots/cleancode'
+save_dir = './snapshots/'
 tensorboard_path = os.path.join(save_dir)
 label_path = os.path.join(save_dir, 'label.txt')  # to save class labels list
 label_distribution_path = os.path.join(save_dir, 'label_dist.txt')  # to save labels distributions list
