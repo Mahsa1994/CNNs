@@ -20,7 +20,7 @@ Here is an example for the `train.csv` and `val.csv` files:
 </tr>
 <tr>
 <td>
-/home/user1/dataset/train_image1.png
+./dataset/train_image1.png
 </td>
 <td>
 label1
@@ -28,7 +28,7 @@ label1
 </tr>
 <tr>
 <td>
-/home/user1/dataset/train_image2.png
+./dataset/train_image2.png
 </td>
 <td>
 label2
@@ -51,7 +51,7 @@ label2
 </tr>
 <tr>
 <td>
-/home/user1/dataset/val_image1.png
+./dataset/val_image1.png
 </td>
 <td>
 label1
@@ -59,7 +59,7 @@ label1
 </tr>
 <tr>
 <td>
-/home/user1/dataset/val_image2.png
+./dataset/val_image2.png
 </td>
 <td>
 label2
@@ -97,14 +97,14 @@ model.fc = nn.Linear(in_features=number_feats, out_features=number_of_classes)
 You may load your own model using below code:
 
 ```
-my_model = torch.load('/home/user1/snapshots/model.pth')
+my_model = torch.load('./snapshots/model.pth')
 model = my_model['state_dict'].module ## when your model has a state_dict 
 ```
 
 ### Start training
 Finally, start to train your model using this command:
 
-```python3 train.py```
+```python train.py```
 
 To monitor the training process use the log file in the `save_dir`:
 
