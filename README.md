@@ -112,6 +112,7 @@ To monitor the training process use the log file in the `save_dir`:
 
 ### Future work
 - [ ] Add inference code
-- [ ] Add different new networks
-- [ ] Add std-mean calculator for normalization
+- [ ] Add new models
+- [ ] Add normalization
+- [ ] Add ONNX convertor
 
