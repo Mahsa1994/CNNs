@@ -22,23 +22,22 @@ ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 # General Settings
 GPUs = torch.cuda.device_count()
-use_gpu = torch.cuda.is_available()  # use GPU
+use_gpu = torch.cuda.is_available()  # Set all variables to use GPU
 
 # DataSet Settings
 TRAIN_IMG_PATH = ''
 TRAIN_IMG_EXT = '.png'
-TRAIN_DATA_CSV = './Dataset/2clss_train/train.csv'
+TRAIN_DATA_CSV = '/Users/mahsa/Mine/Dataset/train.csv' ##'./Dataset/2clss_train/train.csv'
 
 VAL_IMG_PATH = ''
 VAL_IMG_EXT = '.png'
-VAL_DATA_CSV = './Dataset/2clss_val/test.csv'
+VAL_DATA_CSV = '/Users/mahsa/Mine/Dataset/val.csv' ##'./Dataset/2clss_val/test.csv'
 
 number_of_classes = 2
 
 # Training Settings
-batch_size = 4
 num_cores = 1
-final_batch_size = batch_size * GPUs
+final_batch_size = 2
 num_workers = num_cores
 init_learning_rate = 0.000001
 momentum = 0.4
@@ -61,7 +60,7 @@ fineTune_batchNorm = True  # Fine tune batch-normalization
 
 hyper_params_dictionary = {
     'learningRate': init_learning_rate,
-    'final_batch_size': batch_size,
+    'final_batch_size': final_batch_size,
     'image_size': image_size,
     'optimizer': optimizer_type,
     'alphaFocalLoss': focalLoss_alpha,
